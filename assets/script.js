@@ -1,45 +1,51 @@
-
 //array of objects of questions/answers
 const questions = [
     {
         question: 'How do we get the first element in an array?',
-        a: '[0]',
-        b: '[1]',
-        c: '(0)',
-        d: '(1)',
-        correct: 'a',
+        choices: [
+            'A. [0]', 
+            'B. [1]', 
+            'C. (0)', 
+            'D. (1)'],
+        correct: 'A. [0]',
     },
     {
         question: 'What does the "push" method do?',
-        a: 'adds new element to beginning of array',
-        b: 'copies an array',
-        c: 'adds new element to end of array',
-        d: 'other',
-        correct: 'c',
+        choices: [
+            'A. Adds new element to beginning of array', 
+            'B. Copies an array', 
+            'C. Adds new element to end of array', 
+            'D. Deletes an array',
+        ],
+        correct: 'C. Adds new element to end of array',
     },
     {
         question: ' In which HTML element do we link the JavaScript code?',
-        a: '<js>',
-        b: '<javascript>',
-        c: '<script>',
-        d: '<scripting',
-        correct: 'c',
+        choices: [
+            'A. <js>', 
+            'B. <javascript>', 
+            'C. <script>', 
+            'D. <scripting>',
+        ],
+        correct: 'C. <script>',
     },
     {
         question: 'Which of these is a useful tool for debugging JavaScript code?',
-        a: 'if/else statements',
-        b: 'console.lo',
-        c: 'for loops',
-        d: 'while loops',
-        correct: 'b',
+        choices: [
+            'A. if/else statements', 
+            'B. console.log', 
+            'C. for loops', 
+            'D. while loops'],
+        correct: 'B. console.log',
     },
     {
         question: 'How can you add a comment in a JavaScript?',
-        a: '(comment)',
-        b: '//comment',
-        c: '<!-- comment -->',
-        d: '/* comment */',
-        correct: 'b',
+        choices: [
+            'A. (comment)', 
+            'B. //comment', 
+            'C. <!-- comment -->', 
+            'D. /* comment */'],
+        correct: 'B. //comment',
     },
 ];
 console.log(questions);
@@ -54,6 +60,7 @@ const optionD = document.getElementById('optD');
 const submitBtn = document.getElementById('submit');
 const restartBtn = document.getElementById('restart');
 
+let currentQuestionIndex = 0;
 let currentScore = 0;
 let highScores = [];
 let timer;
@@ -65,18 +72,21 @@ startBtn.addEventListener('click', startQuiz);
 //function to start the quiz
 function startQuiz() {
     quizDisplay.classList.remove('hide');
+    displayQuestion();
     startTimer();
 }
 
 //display current question and move to next question
 function displayQuestion() {
-    
+    let currentQuestion = questions[currentQuestionIndex];
+    questionTxt.textContent = currentQuestion.question;
+
+    for (let i = 0; i < currentQuestion.choices.length; i++) {
+        const element = array[i];
+        
+    }
 }
 
-//function to end quiz
-function endQuiz() {
-
-}
 
 //function to update timer
 function startTimer() {
