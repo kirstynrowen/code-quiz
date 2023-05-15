@@ -1,0 +1,14 @@
+*{
+    box-sizing: border-box;
+    background-color: #d0e8b0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+.question-container{ 
+    background-color: blanchedalmond;
+}
+
+.hide {
+    display: none;
+}

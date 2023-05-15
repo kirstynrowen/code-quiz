@@ -9,9 +9,9 @@
     <title>Code Quiz</title>
 </head>
 <body>
-    <div>
+    <header>
         <h2>Welcome to the Code Quiz!</h2>
-    </div>
+    </header>
     <div>
         <h3>Are you a JavaScript pro? Try to answer all the questions correctly in the allotted time! Please keep in mind that each incorrect answer will take 10 seconds off the clock.<br/>
         <br />
@@ -19,7 +19,7 @@
         <button id="start-button">Start Quiz</button>
     </div>
     <!-- high scores container -->
-    <div>
+    <div class ="hide">
         <p>High Scores:</p>
         <ol></ol>
     </div>
@@ -28,7 +28,7 @@
         <h2 id="time-left"></h2>
     </div>
     <!-- Question container -->
-    <div>
+    <div id ="question-container" class="hide">
         <h4 id="questionTxt">Question</h4>
         <div>
             <button id="optA"></button>
@@ -38,7 +38,7 @@
         </div>
     </div>
     <!-- Score container-->
-    <div>
+    <div class ="hide">
         <p>Your final score is: </p>
         <p>Enter your initials to save your score!
             <input type="text" />

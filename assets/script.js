@@ -45,6 +45,7 @@ const questions = [
 console.log(questions);
 const startBtn = document.getElementById('start-button');
 const timerEl = document.getElementById('time-left');
+const quizDisplay = document.getElementById('question-container');
 const questionTxt = document.getElementById('questionTxt');
 const optionA = document.getElementById('optA');
 const optionB = document.getElementById('optB');
@@ -54,17 +55,22 @@ const submitBtn = document.getElementById('submit');
 const restartBtn = document.getElementById('restart');
 
 let currentScore = 0;
+let highScores = [];
 let timer;
-let timerCount;
+let timerCount = 60;
 
 //event listener to call startQuiz function
 startBtn.addEventListener('click', startQuiz);
 
 //function to start the quiz
 function startQuiz() {
-
-
+    quizDisplay.classList.remove('hide');
     startTimer();
+}
+
+//display current question and move to next question
+function displayQuestion() {
+    
 }
 
 //function to end quiz
@@ -77,19 +83,13 @@ function startTimer() {
     // Sets timer
     timer = setInterval(function() {
       timerCount--;
-      timerEl.textContent = 'Time Left:' + timerCount;
-      if (timerCount >= 0) {
-        // Tests if win condition is met
-        if (isWin && timerCount > 0) {
-          // Clears interval and stops timer
-          clearInterval(timer);
-          winGame();
-        }
-      }
+      timerEl.textContent = 'Time Left: ' + timerCount;
+
       // Tests if time has run out
       if (timerCount === 0) {
         // Clears interval
         clearInterval(timer);
+        timerEl.textContent = 'Time is up!';
         endQuiz();
       }
     }, 1000);
