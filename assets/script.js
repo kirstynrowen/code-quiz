@@ -61,6 +61,7 @@ const restartBtn = document.getElementById('restart');
 let currentQuestionIndex = 0;
 let currentScore = 0;
 let highScores = [];
+let initialsEl = document.getElementById('initials');
 let timer;
 let timerCount = 30;
 
@@ -70,6 +71,7 @@ startBtn.addEventListener('click', startQuiz);
 //function to start the quiz
 function startQuiz() {
     quizDisplay.classList.remove('hide');
+    startBtn.classList.add('hide');
     startTimer();
     displayQuestion();
 }
@@ -107,9 +109,9 @@ function checkAnswer(event) {
     } else {
         displayQuestion();
     }
+// console.log(currentScore);
 }
 answersContainer.onclick = checkAnswer;
-console.log(currentScore);
 
 function endQuiz() {
     // stop timer and hide
@@ -121,10 +123,27 @@ function endQuiz() {
     document.getElementById('final-score').textContent = 'Your final score is: ' + currentScore + '/5';
     // restartBtn.addEventListener('click', startQuiz);
 }
+submitBtn.addEventListener('click', function () {
+    let userInitials = initialsEl.value;
+    let finalTime = 30 - timerCount;
+    let finalScore = `${userInitials} scored ${currentScore}/5 in ${finalTime} seconds`;
+    console.log(finalScore);
+    highScores.push(finalScore);
+    console.log(highScores);
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+    showScores();
+})
 
-
-
-
+function showScores() {
+    scoreContainer.classList.remove('hide')
+    let storedScores = JSON.parse(localStorage.getItem('highScores'));
+    const scoresList = document.getElementById('all-scores');
+    for (let i = 0; i < storedScores.length; i++) {
+        let newScore = document.createElement('li')
+        newScore.textContent = storedScores[i];
+        scoresList.appendChild(newScore);    
+    }
+}
 
 //function to start timer
 //   decrements time and prints current time left to timerEL HTML element
