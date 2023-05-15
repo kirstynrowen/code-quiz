@@ -55,6 +55,7 @@ const quizDisplay = document.getElementById('question-container');
 const questionTxt = document.getElementById('questionTxt');
 const answersContainer = document.getElementById('answers-container');
 const scoreContainer = document.getElementById('score-container');
+const highscoreContainer = document.getElementById('highscores-container');
 const submitBtn = document.getElementById('submit');
 const restartBtn = document.getElementById('restart');
 
@@ -121,8 +122,8 @@ function endQuiz() {
     quizDisplay.classList.add('hide');
     scoreContainer.classList.remove('hide');
     document.getElementById('final-score').textContent = 'Your final score is: ' + currentScore + '/5';
-    // restartBtn.addEventListener('click', startQuiz);
 }
+
 submitBtn.addEventListener('click', function () {
     let userInitials = initialsEl.value;
     let finalTime = 30 - timerCount;
@@ -135,7 +136,7 @@ submitBtn.addEventListener('click', function () {
 })
 
 function showScores() {
-    scoreContainer.classList.remove('hide')
+    highscoreContainer.classList.remove('hide');
     let storedScores = JSON.parse(localStorage.getItem('highScores'));
     const scoresList = document.getElementById('all-scores');
     for (let i = 0; i < storedScores.length; i++) {
@@ -144,6 +145,14 @@ function showScores() {
         scoresList.appendChild(newScore);    
     }
 }
+
+restartBtn.addEventListener('click', function() {
+    timerCount = 30;
+    currentScore = 0;
+    currentQuestionIndex = 0;
+    timerEl.classList.remove('hide');
+    startQuiz();
+})
 
 //function to start timer
 //   decrements time and prints current time left to timerEL HTML element
@@ -162,19 +171,3 @@ function startTimer() {
       }
     }, 1000);
   }
-
-// WHEN I answer a question
-//     selectable answer buttons
-// THEN I am presented with another question
-//     show/hide HTML elements with CSS?
-// WHEN I answer a question incorrectly
-//     Need some way to verify question answers
-// THEN time is subtracted from the clock
-//     decrement time by 10 seconds?
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-//     gameOver function
-// WHEN the game is over
-// THEN I can save my initials and my score
-//     local storage
-
