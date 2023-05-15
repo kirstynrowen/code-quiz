@@ -53,10 +53,7 @@ const startBtn = document.getElementById('start-button');
 const timerEl = document.getElementById('time-left');
 const quizDisplay = document.getElementById('question-container');
 const questionTxt = document.getElementById('questionTxt');
-const optionA = document.getElementById('optA');
-const optionB = document.getElementById('optB');
-const optionC = document.getElementById('optC');
-const optionD = document.getElementById('optD');
+const answersContainer = document.getElementById('answers-container');
 const submitBtn = document.getElementById('submit');
 const restartBtn = document.getElementById('restart');
 
@@ -72,23 +69,36 @@ startBtn.addEventListener('click', startQuiz);
 //function to start the quiz
 function startQuiz() {
     quizDisplay.classList.remove('hide');
-    displayQuestion();
     startTimer();
+    displayQuestion();
 }
 
-//display current question and move to next question
+//display current question
 function displayQuestion() {
     let currentQuestion = questions[currentQuestionIndex];
     questionTxt.textContent = currentQuestion.question;
-
+    // loop through answer options and create button element for each
     for (let i = 0; i < currentQuestion.choices.length; i++) {
-        const element = array[i];
-        
+        let userChoice = currentQuestion.choices[i];
+        let choiceBtn = document.createElement('button');
+        choiceBtn.setAttribute('value', userChoice);
+        choiceBtn.classList.add('choice');
+        choiceBtn.textContent = choice;
+        answersContainer.appendChild(choiceBtn);
     }
 }
 
-
-//function to update timer
+function checkAnswer(event) {
+    let selectedBtn = event.target;
+    if (selectedBtn.value !== questions[currentQuestionIndex].correct) {
+        time -= 10;
+    } else {
+        score ++
+    }
+}
+answersContainer.onclick = checkAnswer();
+//function to start timer
+//   decrements time and prints current time left to timerEL HTML element
 function startTimer() {
     // Sets timer
     timer = setInterval(function() {
@@ -104,7 +114,7 @@ function startTimer() {
       }
     }, 1000);
   }
-//     setInterval function to decrement time and update, HTML element to display time left
+
 // WHEN I answer a question
 //     selectable answer buttons
 // THEN I am presented with another question
