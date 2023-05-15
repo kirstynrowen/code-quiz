@@ -82,8 +82,8 @@ function displayQuestion() {
         let userChoice = currentQuestion.choices[i];
         let choiceBtn = document.createElement('button');
         choiceBtn.setAttribute('value', userChoice);
-        choiceBtn.classList.add('choice');
-        choiceBtn.textContent = choice;
+        //choiceBtn.classList.add('choice');
+        choiceBtn.textContent = userChoice;
         answersContainer.appendChild(choiceBtn);
     }
 }
@@ -95,8 +95,15 @@ function checkAnswer(event) {
     } else {
         score ++
     }
+    currentQuestionIndex ++
+
+    if (timerCount <= 0 || currentQuestionIndex === questions.length) {
+        endQuiz();
+    } else {
+        displayQuestion();
+    }
 }
-answersContainer.onclick = checkAnswer();
+answersContainer.onclick = checkAnswer;
 //function to start timer
 //   decrements time and prints current time left to timerEL HTML element
 function startTimer() {
