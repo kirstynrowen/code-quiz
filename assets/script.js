@@ -58,7 +58,7 @@ const scoreContainer = document.getElementById('score-container');
 const highscoreContainer = document.getElementById('highscores-container');
 const submitBtn = document.getElementById('submit');
 const restartBtn = document.getElementById('restart');
-
+const message = document.getElementById('message');
 let currentQuestionIndex = 0;
 let currentScore = 0;
 let highScores = [];
@@ -97,9 +97,11 @@ function checkAnswer(event) {
     let selectedBtn = event.target;
     if (selectedBtn.value !== questions[currentQuestionIndex].correct) {
         timerCount -= 5;
-        timerEl.setAttribute('style','color: #ff0000');
+        message.textContent = 'Incorrect!'
+        message.setAttribute('style','color: #ff0000');
     } else {
-        timerEl.setAttribute('style','color: #000000');
+        message.textContent = 'Correct!';
+        message.setAttribute('style','color: #009e02');
         currentScore ++
     }
 
@@ -145,12 +147,13 @@ function showScores() {
         scoresList.appendChild(newScore);    
     }
 }
-
+//reset quiz data
 restartBtn.addEventListener('click', function() {
     timerCount = 30;
     currentScore = 0;
     currentQuestionIndex = 0;
     timerEl.classList.remove('hide');
+    message.textContent = '';
     startQuiz();
 })
 
