@@ -54,6 +54,7 @@ const timerEl = document.getElementById('time-left');
 const quizDisplay = document.getElementById('question-container');
 const questionTxt = document.getElementById('questionTxt');
 const answersContainer = document.getElementById('answers-container');
+const scoreContainer = document.getElementById('score-container');
 const submitBtn = document.getElementById('submit');
 const restartBtn = document.getElementById('restart');
 
@@ -77,12 +78,13 @@ function startQuiz() {
 function displayQuestion() {
     let currentQuestion = questions[currentQuestionIndex];
     questionTxt.textContent = currentQuestion.question;
+    // fixing answers display issue: remove previous choices from page
+    answersContainer.innerHTML = '';
     // loop through answer options and create button element for each
     for (let i = 0; i < currentQuestion.choices.length; i++) {
         let userChoice = currentQuestion.choices[i];
         let choiceBtn = document.createElement('button');
         choiceBtn.setAttribute('value', userChoice);
-        //choiceBtn.classList.add('choice');
         choiceBtn.textContent = userChoice;
         answersContainer.appendChild(choiceBtn);
     }
@@ -91,10 +93,11 @@ function displayQuestion() {
 function checkAnswer(event) {
     let selectedBtn = event.target;
     if (selectedBtn.value !== questions[currentQuestionIndex].correct) {
-        time -= 10;
+        timerCount -= 10;
     } else {
-        score ++
+        currentScore ++
     }
+
     currentQuestionIndex ++
 
     if (timerCount <= 0 || currentQuestionIndex === questions.length) {
@@ -104,6 +107,15 @@ function checkAnswer(event) {
     }
 }
 answersContainer.onclick = checkAnswer;
+console.log(currentScore);
+
+function endQuiz() {
+    questionTxt.classList.add('hide');
+    scoreContainer.classList.remove('hide');
+    document.getElementById('final-score').textContent = 'Your final score is: ' + currentScore;
+
+}
+
 //function to start timer
 //   decrements time and prints current time left to timerEL HTML element
 function startTimer() {
