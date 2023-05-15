@@ -15,17 +15,36 @@
     <div>
         <h3>Are you a JavaScript pro? Try to answer all the questions correctly in the allotted time! Please keep in mind that each incorrect answer will take 10 seconds off the clock.<br/>
         <br />
-        Good luck!</h3><br />
-        <br />
-        <button>Start Quiz</button>
+        Good luck!</h3>
+        <button id="start-button">Start Quiz</button>
+    </div>
+    <!-- high scores container -->
+    <div>
+        <p>High Scores:</p>
+        <ol></ol>
     </div>
     <!-- Timer containter -->
     <div>
-        <h1>Time Left: </h1>
+        <h2 id="time-left"></h2>
     </div>
     <!-- Question container -->
     <div>
-
+        <h4 id="questionTxt">Question</h4>
+        <div>
+            <button id="optA"></button>
+            <button id="optB"></button>
+            <button id="optC"></button>
+            <button id="optD"></button>
+        </div>
+    </div>
+    <!-- Score container-->
+    <div>
+        <p>Your final score is: </p>
+        <p>Enter your initials to save your score!
+            <input type="text" />
+            <button id="submit">Submit</button>
+            <button id="restart">Start Over</button>
+        </p>
     </div>
     <!-- link JavaScript-->
     <script src="./assets/script.js"></script>
