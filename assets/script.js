@@ -62,7 +62,7 @@ let currentQuestionIndex = 0;
 let currentScore = 0;
 let highScores = [];
 let timer;
-let timerCount = 60;
+let timerCount = 30;
 
 //event listener to call startQuiz function
 startBtn.addEventListener('click', startQuiz);
@@ -93,8 +93,10 @@ function displayQuestion() {
 function checkAnswer(event) {
     let selectedBtn = event.target;
     if (selectedBtn.value !== questions[currentQuestionIndex].correct) {
-        timerCount -= 10;
+        timerCount -= 5;
+        timerEl.setAttribute('style','color: #ff0000');
     } else {
+        timerEl.setAttribute('style','color: #000000');
         currentScore ++
     }
 
@@ -110,11 +112,19 @@ answersContainer.onclick = checkAnswer;
 console.log(currentScore);
 
 function endQuiz() {
-    questionTxt.classList.add('hide');
+    // stop timer and hide
+    clearInterval(timer);
+    timerEl.classList.add('hide');
+    // hide questions section and show scores section
+    quizDisplay.classList.add('hide');
     scoreContainer.classList.remove('hide');
-    document.getElementById('final-score').textContent = 'Your final score is: ' + currentScore;
-
+    document.getElementById('final-score').textContent = 'Your final score is: ' + currentScore + '/5';
+    // restartBtn.addEventListener('click', startQuiz);
 }
+
+
+
+
 
 //function to start timer
 //   decrements time and prints current time left to timerEL HTML element
