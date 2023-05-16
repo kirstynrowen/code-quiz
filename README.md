@@ -25,13 +25,12 @@ THEN I can save my initials and my score
 ```
 
 ## Description
+This application is a simple quiz on JavaScript fundamentals. Users are given 30 seconds to answer 5 multiple-choic questions. A timer is displayed above the current question, and for each incorrect answer the time decrements by 5 seconds. The user is shown which answers are correct or incorrect as they answer. Upon completion of the quiz, users are presented with their final score. Users can then enter their initials to save their score, and presented with a button to restart the quiz . After completion of the first attempt, the list of high scores will remain on the page below the quiz. 
 
+### Preview of Deployed Application
+The following animation demonstrates the application's functionality:
 
-
-
-### Image of Deployed Application
-
-* Satisfies all of the preceding acceptance criteria.
+![Preview of Quiz](code-quiz.gif)
 
 ### Link to Deployed Application
 
