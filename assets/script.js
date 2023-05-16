@@ -48,7 +48,7 @@ const questions = [
         correct: 'B. //comment',
     },
 ];
-console.log(questions);
+
 const startBtn = document.getElementById('start-button');
 const timerEl = document.getElementById('time-left');
 const quizDisplay = document.getElementById('question-container');
@@ -126,33 +126,40 @@ function endQuiz() {
     document.getElementById('final-score').textContent = 'Your final score is: ' + currentScore + '/5';
 }
 
-submitBtn.addEventListener('click', function () {
-    let userInitials = initialsEl.value;
-    let finalTime = 30 - timerCount;
-    let finalScore = `${userInitials} scored ${currentScore}/5 in ${finalTime} seconds`;
-    console.log(finalScore);
+submitBtn.addEventListener('click', function(event){
+    event.preventDefault();
+    const finalScore = {
+        userInitials: initialsEl.value.trim(),
+        finalTime: 30 - timerCount,
+        currentScore, 
+    };
     highScores.push(finalScore);
-    console.log(highScores);
     localStorage.setItem('highScores', JSON.stringify(highScores));
     showScores();
 })
 
 function showScores() {
     highscoreContainer.classList.remove('hide');
-    let storedScores = JSON.parse(localStorage.getItem('highScores'));
+    const storedScores = JSON.parse(localStorage.getItem('highScores'));
     const scoresList = document.getElementById('all-scores');
-    for (let i = 0; i < storedScores.length; i++) {
-        let newScore = document.createElement('li')
-        newScore.textContent = storedScores[i];
-        scoresList.appendChild(newScore);    
-    }
-}
+    scoresList.innerHTML = '';
+    initialsEl.value = '';
+    if (storedScores != null) {
+        for (let i = 0; i < storedScores.length; i++) {
+            let newScore = document.createElement('li');
+            newScore.textContent = storedScores[i].userInitials + ' scored ' + storedScores[i].currentScore + '/5 in ' + storedScores[i].finalTime + ' seconds';
+            scoresList.appendChild(newScore);
+          }    
+        }
+};
+
 //reset quiz data
 restartBtn.addEventListener('click', function() {
     timerCount = 30;
     currentScore = 0;
     currentQuestionIndex = 0;
     timerEl.classList.remove('hide');
+    scoreContainer.classList.add('hide');
     message.textContent = '';
     startQuiz();
 })
